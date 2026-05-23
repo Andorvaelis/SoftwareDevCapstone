@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">TaskNest</string>
+    <string name="button_main_menu">Main Menu</string>
+    <string name="info">Click within the note or task boxes to view the notes or tasks lists.</string>
+
+    // Login Screen
+    <string name="login_subtitle">Like a nest for your mind</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Login</string>
+
+    // Dashboard
+    <string name="dashboard_title">The Nest</string>
+    <string name="display_tasks">Task Name               |  Date   |   Something else</string>
+    <string name="add_task">Add Task</string>
+    <string name="view_tasks">View Tasks</string>
+    <string name="display_notes">Display a list of notes</string>
+    <string name="add_note">Add Note</string>
+    <string name="view_notes">View Notes</string>
+    <string name="logout">Logout</string>
+
+    // View Tasks
+    <string name="view_tasks_title">Tasks</string>
+    <string name="task_1">This is the first task</string>
+    <string name="task_2">This is the second task</string>
+    <string name="task_3">This is the third task</string>
+    <string name="task_4">This is the fourth task</string>
+    <string name="task_5">This is the fifth task</string>
+
+    // View Notes
+    <string name="view_notes_title">Notes</string>
+    <string name="note_1">This is the first note</string>
+    <string name="note_2">This is the second note</string>
+    <string name="note_3">This is the third note</string>
+    <string name="note_4">This is the fourth note</string>
+    <string name="note_5">This is the fifth note</string>
+
+    // Add Task
+    <string name="txt_add_task">Add Task</string>
+    <string name="hint_task_title">Task Title</string>
+    <string name="hint_task_desc">Task Description</string>
+    <string name="hint_task_due">Task Due Date</string>
+    <string name="hint_task_priority">Task Priority Level</string>
+
+    // Add Note
+    <string name="txt_add_note">Add Note</string>
+    <string name="hint_note_title">Note Title</string>
+    <string name="hint_note_desc">Note Description</string>
+</resources>
