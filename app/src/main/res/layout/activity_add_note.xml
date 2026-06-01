@@ -24,19 +24,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayoutAddTask"
+        android:id="@+id/linearLayoutAddNote"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="0dp"
         android:background="@drawable/login_linear_background"
         android:gravity="center"
         android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintTop_toBottomOf="@id/txtDashboardTitle"
+        app:layout_constraintBottom_toTopOf="@id/layoutBottomButtonsAddNote"
         tools:layout_editor_absoluteX="16dp">
 
         <EditText
-            android:id="@+id/txtTaskTitle"
-            android:layout_width="350dp"
+            android:id="@+id/edtNoteTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_corner"
             android:padding="10dp"
@@ -50,9 +52,9 @@
             app:layout_constraintHorizontal_bias="0.5" />
 
         <EditText
-            android:id="@+id/txtTaskDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="450dp"
+            android:id="@+id/edtNoteDesc"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_corner"
             android:padding="10dp"
@@ -65,24 +67,41 @@
             android:textColorHint="#CACACA"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" />
+            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btnSaveNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/save_note"
+            android:textSize="24sp" />
+
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnMainMenu"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/layoutBottomButtonsAddNote"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="#A06FF6"
-        android:text="@string/button_main_menu"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btnMainMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_main_menu"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

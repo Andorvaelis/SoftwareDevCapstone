@@ -9,6 +9,19 @@
     <string name="password_hint">Password</string>
     <string name="login_button">Login</string>
 
+    // Register
+    <string name="register_title">Register</string>
+    <string name="register_account">Register Account</string>
+    <string name="hint_username">Enter Username</string>
+    <string name="hint_password">Enter Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+
+    // Change Password
+    <string name="change_password_title">Change Password</string>
+    <string name="hint_current_password">Current Password</string>
+    <string name="hint_new_password">New Password</string>
+    <string name="hint_confirm_new_password">Confirm New Password</string>
+
     // Dashboard
     <string name="dashboard_title">The Nest</string>
     <string name="display_tasks">Task Name               |  Date   |   Something else</string>
@@ -18,22 +31,19 @@
     <string name="add_note">Add Note</string>
     <string name="view_notes">View Notes</string>
     <string name="logout">Logout</string>
+    <string name="change_password">Change Password</string>
 
     // View Tasks
     <string name="view_tasks_title">Tasks</string>
-    <string name="task_1">This is the first task</string>
-    <string name="task_2">This is the second task</string>
-    <string name="task_3">This is the third task</string>
-    <string name="task_4">This is the fourth task</string>
-    <string name="task_5">This is the fifth task</string>
+    <string name="search_for_tasks">Search for tasks using a keyword</string>
+    <string name="delete_task">Delete Task</string>
 
     // View Notes
     <string name="view_notes_title">Notes</string>
-    <string name="note_1">This is the first note</string>
-    <string name="note_2">This is the second note</string>
-    <string name="note_3">This is the third note</string>
-    <string name="note_4">This is the fourth note</string>
-    <string name="note_5">This is the fifth note</string>
+    <string name="hint_search_notes">Search for notes using a keyword</string>
+    <string name="search_notes">Search</string>
+    <string name="search_for_notes">Search for notes using a keyword</string>
+    <string name="delete_note">Delete Note</string>
 
     // Add Task
     <string name="txt_add_task">Add Task</string>
@@ -41,9 +51,14 @@
     <string name="hint_task_desc">Task Description</string>
     <string name="hint_task_due">Task Due Date</string>
     <string name="hint_task_priority">Task Priority Level</string>
+    <string name="save_task">Save Task</string>
+    <string name="new_task">New</string>
 
     // Add Note
     <string name="txt_add_note">Add Note</string>
     <string name="hint_note_title">Note Title</string>
     <string name="hint_note_desc">Note Description</string>
+    <string name="save_note">Save Note</string>
+    <string name="new_note">New</string>
+
 </resources>

@@ -3,6 +3,8 @@ package com.example.tasknest
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,11 +21,59 @@ class AddNote : AppCompatActivity() {
             insets
         }
 
+        // Initialization and navigation to main menu
         val btnMainMenu = findViewById<Button>(R.id.btnMainMenu)
 
         btnMainMenu.setOnClickListener {
             val intent = Intent(this, MainMenu::class.java)
             startActivity(intent)
+        }
+
+        // Initialization
+        val edtNoteTitle = findViewById<EditText>(R.id.edtNoteTitle)
+        val edtNoteContent = findViewById<EditText>(R.id.edtNoteDesc)
+        val btnSaveNote = findViewById<Button>(R.id.btnSaveNote)
+
+        // Handles saving the note
+        btnSaveNote.setOnClickListener {
+
+            // Retrieve and clean user input
+            val title = edtNoteTitle.text.toString().trim()
+            val content = edtNoteContent.text.toString().trim()
+
+            // Verify all fields are complete
+            if (title.isEmpty() || content.isEmpty()) {
+                Toast.makeText(this, "Please enter a title and note.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            //Access to SharedPreferences where notes are stored
+            val sharedPreferences =
+                getSharedPreferences("TaskNestPrefs", MODE_PRIVATE)
+
+            // Retrieves existing notes
+            val savedNotes =
+                sharedPreferences.getStringSet("notes", mutableSetOf())
+                    ?.toMutableSet() ?: mutableSetOf()
+
+            // Formate note for storage
+            val note = "$title|$content"
+
+            // Adds note to storage
+            savedNotes.add(note)
+
+            // Save updated notes set
+            sharedPreferences.edit()
+                .putStringSet("notes", savedNotes)
+                .apply()
+
+            // Notify user the note has been saved
+            Toast.makeText(this, "Note saved!", Toast.LENGTH_SHORT).show()
+
+            //Navigate to View Notes activity
+            val intent = Intent(this, ViewNotes::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }
