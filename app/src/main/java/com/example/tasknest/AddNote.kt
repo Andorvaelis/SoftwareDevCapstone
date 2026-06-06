@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +34,23 @@ class AddNote : AppCompatActivity() {
         val edtNoteTitle = findViewById<EditText>(R.id.edtNoteTitle)
         val edtNoteContent = findViewById<EditText>(R.id.edtNoteDesc)
         val btnSaveNote = findViewById<Button>(R.id.btnSaveNote)
+        val txtPageTitle = findViewById<TextView>(R.id.txtNotePageTitle)
+
+        // // Adds ability to edit AND add through the same activity
+        val oldNote = intent.getStringExtra("oldNote")
+        val isEditMode = oldNote != null
+
+        if (isEditMode) {
+            btnSaveNote.text = "Update Note"
+            txtPageTitle.text = "Edit Note"
+
+            val noteParts = oldNote!!.split("|", limit = 2)
+
+            if (noteParts.size == 2) {
+                edtNoteTitle.setText(noteParts[0])
+                edtNoteContent.setText(noteParts[1])
+            }
+        }
 
         // Handles saving the note
         btnSaveNote.setOnClickListener {
@@ -56,19 +74,27 @@ class AddNote : AppCompatActivity() {
                 sharedPreferences.getStringSet("notes", mutableSetOf())
                     ?.toMutableSet() ?: mutableSetOf()
 
-            // Formate note for storage
+            // Format note for storage
             val note = "$title|$content"
 
-            // Adds note to storage
-            savedNotes.add(note)
+            // Add the new note to the set or edit current note
+            if (isEditMode) {
+                savedNotes.remove(oldNote)
+                savedNotes.add(note)
+
+                // Notify the user that the note has been updated
+                Toast.makeText(this, "Note updated!", Toast.LENGTH_SHORT).show()
+            } else {
+                savedNotes.add(note)
+
+                // Notify the user that the note has been saved
+                Toast.makeText(this, "Note saved!", Toast.LENGTH_SHORT).show()
+            }
 
             // Save updated notes set
             sharedPreferences.edit()
                 .putStringSet("notes", savedNotes)
                 .apply()
-
-            // Notify user the note has been saved
-            Toast.makeText(this, "Note saved!", Toast.LENGTH_SHORT).show()
 
             //Navigate to View Notes activity
             val intent = Intent(this, ViewNotes::class.java)

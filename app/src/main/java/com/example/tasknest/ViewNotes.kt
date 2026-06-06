@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.ContextThemeWrapper
+import android.view.Gravity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -98,6 +99,19 @@ class ViewNotes : AppCompatActivity() {
                 )
                 deleteButton.text = "Delete Note"
 
+                // Add edit note button to note list
+                val editButton = Button(
+                    ContextThemeWrapper(this,R.style.DeleteButtonStyle)
+                )
+                editButton.text = "Edit Note"
+
+                // Handle note editing
+                editButton.setOnClickListener {
+                    val intent = Intent(this, AddNote::class.java)
+                    intent.putExtra("oldNote", note)
+                    startActivity(intent)
+                }
+
                 // Handle note deletion
                 deleteButton.setOnClickListener {
                     val currentNotes = sharedPreferences
@@ -118,8 +132,39 @@ class ViewNotes : AppCompatActivity() {
                     loadNotes(editSearchNotes.text.toString())
                 }
 
+                // Create horizontal layout for buttons
+                val buttonLayout = LinearLayout(this)
+                buttonLayout.orientation = LinearLayout.HORIZONTAL
+
+                // Center the buttons in the layout
+                buttonLayout.gravity = Gravity.CENTER_HORIZONTAL
+
+                // Button formatting
+                val buttonParams = LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+
+                buttonParams.marginEnd = 16
+
+                editButton.layoutParams = buttonParams
+
+                deleteButton.layoutParams = LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+
+                // Add buttons to view
+                buttonLayout.addView(editButton)
+                buttonLayout.addView(deleteButton)
+
+                // Add padding between Edit and Delete buttons
+                editButton.setPadding(0, 0, 16, 0)
+
                 layoutNotesList.addView(noteText)
-                layoutNotesList.addView(deleteButton)
+                layoutNotesList.addView(buttonLayout)
             }
         }
 

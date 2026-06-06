@@ -3,6 +3,7 @@ package com.example.tasknest
 import android.content.Intent
 import android.os.Bundle
 import android.view.ContextThemeWrapper
+import android.view.Gravity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -107,6 +108,19 @@ class ViewTasks : AppCompatActivity() {
                 )
                 deleteButton.text = "Delete Task"
 
+                // Add edit note button to note list
+                val editButton = Button(
+                    ContextThemeWrapper(this,R.style.DeleteButtonStyle)
+                )
+                editButton.text = "Edit Task"
+
+                // Handle note editing
+                editButton.setOnClickListener {
+                    val intent = Intent(this, AddTask::class.java)
+                    intent.putExtra("oldTask", task)
+                    startActivity(intent)
+                }
+
                 // Delete button listener
                 deleteButton.setOnClickListener {
 
@@ -134,9 +148,39 @@ class ViewTasks : AppCompatActivity() {
                     loadTasks(editSearchTasks.text.toString())
                 }
 
-                // Add task info and delete button to the layout
+                // Create horizontal layout for buttons
+                val buttonLayout = LinearLayout(this)
+                buttonLayout.orientation = LinearLayout.HORIZONTAL
+
+                // Center the buttons in the layout
+                buttonLayout.gravity = Gravity.CENTER_HORIZONTAL
+
+                // Button formatting
+                val buttonParams = LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+
+                buttonParams.marginEnd = 16
+
+                editButton.layoutParams = buttonParams
+
+                deleteButton.layoutParams = LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+
+                // Add buttons to view
+                buttonLayout.addView(editButton)
+                buttonLayout.addView(deleteButton)
+
+                // Add padding between Edit and Delete buttons
+                editButton.setPadding(0, 0, 16, 0)
+
                 layoutTasksList.addView(taskText)
-                layoutTasksList.addView(deleteButton)
+                layoutTasksList.addView(buttonLayout)
             }
         }
 

@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +30,7 @@ class AddTask : AppCompatActivity() {
         val txtTaskTitle = findViewById<EditText>(R.id.txtTaskTitle)
         val txtTaskDesc = findViewById<EditText>(R.id.txtTaskDesc)
         val btnSaveTask = findViewById<Button>(R.id.btnSaveTask)
+        val txtPageTitle = findViewById<TextView>(R.id.txtTaskPageTitle)
 
         // Return to main menu
         btnMainMenu.setOnClickListener {
@@ -56,6 +58,27 @@ class AddTask : AppCompatActivity() {
         // Attach adapter to spinner
         spinner.adapter = adapter
 
+        // Adds ability to edit AND add through the same activity
+        val oldTask = intent.getStringExtra("oldTask")
+        val isEditMode = oldTask != null
+
+        if (isEditMode) {
+            btnSaveTask.text = "Update Task"
+            txtPageTitle.text = "Edit Task"
+
+            val taskParts = oldTask!!.split("|")
+
+            if (taskParts.size == 3) {
+                txtTaskTitle.setText(taskParts[0])
+                txtTaskDesc.setText(taskParts[1])
+
+                val priorityIndex = items.indexOf(taskParts[2])
+                if (priorityIndex >= 0) {
+                    spinner.setSelection(priorityIndex)
+                }
+            }
+        }
+
         // Button to save tasks
         btnSaveTask.setOnClickListener {
             // Retrieve and clean user input
@@ -80,16 +103,24 @@ class AddTask : AppCompatActivity() {
             // Format task data for storage
             val task = "$title|$description|$priority"
 
-            // Add the new task to the set
-            savedTasks.add(task)
+            // Add the new task to the set or edit current task
+            if (isEditMode) {
+                savedTasks.remove(oldTask)
+                savedTasks.add(task)
+
+                // Notify user that task has been updated
+                Toast.makeText(this, "Task updated!", Toast.LENGTH_SHORT).show()
+            } else {
+                savedTasks.add(task)
+
+                // Notify user that task has been added
+                Toast.makeText(this, "Task saved!", Toast.LENGTH_SHORT).show()
+            }
 
             // Save updated task list
             sharedPreferences.edit()
                 .putStringSet("tasks", savedTasks)
                 .apply()
-
-            // Notify user the task has been saved
-            Toast.makeText(this, "Task saved!", Toast.LENGTH_SHORT).show()
 
             // Clear form fields
             txtTaskTitle.text.clear()

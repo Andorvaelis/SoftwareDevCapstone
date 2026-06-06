@@ -37,6 +37,7 @@
     <string name="view_tasks_title">Tasks</string>
     <string name="search_for_tasks">Search for tasks using a keyword</string>
     <string name="delete_task">Delete Task</string>
+    <string name="update_task">Update Task</string>
 
     // View Notes
     <string name="view_notes_title">Notes</string>
@@ -44,6 +45,7 @@
     <string name="search_notes">Search</string>
     <string name="search_for_notes">Search for notes using a keyword</string>
     <string name="delete_note">Delete Note</string>
+    <string name="update_note">Update Note</string>
 
     // Add Task
     <string name="txt_add_task">Add Task</string>
@@ -60,5 +62,11 @@
     <string name="hint_note_desc">Note Description</string>
     <string name="save_note">Save Note</string>
     <string name="new_note">New</string>
+
+    // Edit Task
+    <string name="edit_task_title">Edit Task</string>
+
+    // Edit Note
+    <string name="edit_note_title">Edit Note</string>
 
 </resources>
